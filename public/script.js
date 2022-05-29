@@ -20,6 +20,7 @@ searchBox.addListener('places_changed', () => {
     })
 })
 
+const iconElement = document.querySelector('[data-icon]')
 const statusElement = document.querySelector('[data-status]')
 const locationElement = document.querySelector('[data-location]')
 const windElement = document.querySelector('[data-wind')
@@ -29,8 +30,10 @@ const precipitationElement = document.querySelector('[data-precipitation]')
 function setWeatherData(data, place){
     locationElement.textContent = place
     statusElement.textContent = data.weather_descriptions[0]
-    windElement.textContent = data.wind_speed
-    temperatureElement.textContent = data.temperature
-    precipitationElement.textContent = data.precip
+    windElement.textContent = data.wind_speed + " kph"
+    temperatureElement.textContent = data.temperature + "℉"
+    precipitationElement.textContent = data.precip + " mm"
+    iconElement.src = data.weather_icons[0]
+    
     
 }
