@@ -4,7 +4,7 @@ searchBox.addListener('places_changed', () => {
     const place = searchBox.getPlaces()[0]
     if (place == null) return
     const latitude = place.geometry.location.lat()
-    const longtitude = place.geometry.location.lng()
+    const longitude = place.geometry.location.lng()
     fetch('/weather', {
         method: 'POST',
         headers: {
@@ -13,10 +13,11 @@ searchBox.addListener('places_changed', () => {
         },
         body: JSON.stringify({
             latitude: latitude,
-            longtitude: longtitude
+            longitude: longitude
         })
     }).then(res => res.json()).then(data => {
-        setWeatherData(data, place.formatted_address)
+        // console.log(data)
+        // setWeatherData(data, place.formatted_address)
     })
 })
 
