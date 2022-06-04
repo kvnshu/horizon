@@ -16,8 +16,49 @@ searchBox.addListener('places_changed', () => {
             longitude: longitude
         })
     }).then(res => res.json()).then(data => {
-        // console.log(data)
-        // setWeatherData(data, place.formatted_address)
+        console.log(data)
+        var todayDate = new Date()
+        var todaySunsetDate = new Date(data.locations[latitude + ", " + longitude].currentConditions.sunset)
+        var nextSunsetDate = todaySunsetDate
+
+        // get next sunset
+        if(todayDate.getTime() > todaySunsetDate.getTime()){
+            console.log(todayDate.toLocaleTimeString() + "is after " + todaySunsetDate.toLocaleTimeString())
+            var nextDayHours = 24 - todayDate.getHours()
+            var nextSunsetDate = new Date(data.locations[latitude + ", " + longitude].values[nextDayHours].sunset)
+            console.log(`the next sunset is at ${nextSunsetDate.toLocaleTimeString()}`)
+        }
+
+        // round off sunset time
+        var roundedSunsetDate = nextSunsetDate
+        if(nextSunsetDate.getMinutes() < 30){
+            roundedSunsetDate.setMinutes(0, 0, 0)
+        } else {
+            roundedSunsetDate.setHours(nextSunsetDate.getHours() + 1)
+            roundedSunsetDate.setMinutes(0, 0, 0)
+        }
+
+        // get sunset measurements
+        var nextSunsetHours = roundedSunsetDate.getHours() - todayDate.getHours()
+        const sunsetHumidity = data.locations[latitude + ", " + longitude].values[nextSunsetHours].humidity / 100
+        const sunsetCloudCover = data.locations[latitude + ", " + longitude].values[nextSunsetHours].cloudcover / 100
+        const sunsetPop = data.locations[latitude + ", " + longitude].values[nextSunsetHours].pop / 100
+        const sunsetPrecip = data.locations[latitude + ", " + longitude].values[nextSunsetHours - 1].precip / 100
+
+        console.log(sunsetHumidity)
+        console.log(sunsetCloudCover)
+        console.log(sunsetPop)
+
+        // create model 
+        var pSunset = 0;
+        pSunset += 1 - sunsetHumidity
+        pSunset += Math.exp(-16*((sunsetCloudCover-0.5)**2))
+        //  pSunset += 1 - sunsetPop
+        // pSunset += sunsetPrecip/4.5
+
+        console.log(`The probability of a sunset is ${pSunset/2 * 100}%`)
+        
+        setWeatherData(data.locations[latitude + ", " + longitude].currentConditions, place.formatted_address)
     })
 })
 
@@ -30,11 +71,11 @@ const precipitationElement = document.querySelector('[data-precipitation]')
 
 function setWeatherData(data, place){
     locationElement.textContent = place
-    statusElement.textContent = data.weather_descriptions[0]
-    windElement.textContent = data.wind_speed + " kph"
-    temperatureElement.textContent = data.temperature + "℉"
+    
+    statusElement.textContent = data.icon.replace("-", " ").toUpperCase()
+    windElement.textContent = data.wspd + " kph"
+    temperatureElement.textContent = data.temp + "℉"
     precipitationElement.textContent = data.precip + " mm"
-    iconElement.src = data.weather_icons[0]
-    
-    
+    // iconElement.src = data.weather_icons[0]
+
 }
