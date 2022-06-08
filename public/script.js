@@ -5,7 +5,6 @@ searchBox.addListener('places_changed', () => {
     if (place == null) return
     const latitude = place.geometry.location.lat()
     const longitude = place.geometry.location.lng()
-    console.log(`${latitude}, ${longitude}`)
     fetch('/weather', {
         method: 'POST',
         headers: {
@@ -17,7 +16,6 @@ searchBox.addListener('places_changed', () => {
             longitude: longitude
         })
     }).then(res => res.json()).then(data => {
-        console.log(data)
         var todayDate = new Date()
         var todaySunsetDate = new Date(data.locations[latitude + ", " + longitude].currentConditions.sunset)
         var nextSunsetDate = todaySunsetDate
@@ -58,6 +56,7 @@ searchBox.addListener('places_changed', () => {
         pSunset += Math.exp(-16*((sunsetCloudCover-0.5)**2))
         // pSunset += 1 - sunsetPop
         // pSunset += sunsetPrecip/4.5
+        pSunset = (pSunset * 100).toFixed(2)
 
         // console.log(`The probability of a sunset is ${pSunset/2 * 100}%`)
         
@@ -74,7 +73,7 @@ const temperatureElement = document.querySelector('[data-temperature]')
 
 function setWeatherData(data, location, sunsetProb){
     locationElement.textContent = location
-    probElement.textContent = `The probability of a sunset is ${(Math.round(sunsetProb*100)/100)/2 * 100}%`
+    probElement.textContent = `The probability of a sunset is ${sunsetProb}%`
     cloudcoverElement.textContent = `${data.cloudcover}%`
     timeElement.textContent = (new Date(data.sunset)).toLocaleTimeString()
     temperatureElement.textContent = data.temp + "℉"
