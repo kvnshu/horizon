@@ -7,6 +7,7 @@ const VISUALCROSSING_API_KEY = process.env.VISUALCROSSING_API_KEY
 const axios = require('axios')
 const express = require('express')
 const app = express()
+const port = process.env.PORT || 8080
 
 app.use(express.json())
 app.use(express.static('public'))
@@ -38,6 +39,6 @@ app.post('/weather', (req, res) => {
     });
 })
 
-app.listen(8080, () => {
-    console.log('Server Started');
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
 })
