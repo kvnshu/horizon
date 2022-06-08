@@ -2,7 +2,6 @@ if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
 
-const WEATHERSKY_API_KEY = process.env.WEATHERSKY_API_KEY
 const VISUALCROSSING_API_KEY = process.env.VISUALCROSSING_API_KEY
 const axios = require('axios')
 const express = require('express')
