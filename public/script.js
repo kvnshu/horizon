@@ -26,7 +26,7 @@ searchBox.addListener('places_changed', () => {
             console.log(todayDate.toLocaleTimeString() + "is after " + todaySunsetDate.toLocaleTimeString())
             var nextDayHours = 24 - todayDate.getHours()
             var nextSunsetDate = new Date(data.locations[latitude + ", " + longitude].values[nextDayHours].sunset)
-            console.log(`the next sunset is at ${nextSunsetDate.toLocaleTimeString()}`)
+            console.log(`the next sunset is tomorrow at ${nextSunsetDate.toLocaleTimeString()}`)
         }
 
         // round off sunset time
@@ -40,6 +40,8 @@ searchBox.addListener('places_changed', () => {
 
         // get sunset measurements
         var nextSunsetHours = roundedSunsetDate.getHours() - todayDate.getHours()
+        console.log(`${nextSunsetHours} hours until sunset.`)
+        // what if nextSunsetHours == 0? get currentConditions or values[0]? or are they the same?
         const sunsetHumidity = data.locations[latitude + ", " + longitude].values[nextSunsetHours].humidity / 100
         const sunsetCloudCover = data.locations[latitude + ", " + longitude].values[nextSunsetHours].cloudcover / 100
         const sunsetPop = data.locations[latitude + ", " + longitude].values[nextSunsetHours].pop / 100
@@ -53,29 +55,27 @@ searchBox.addListener('places_changed', () => {
         var pSunset = 0;
         pSunset += 1 - sunsetHumidity
         pSunset += Math.exp(-16*((sunsetCloudCover-0.5)**2))
-        //  pSunset += 1 - sunsetPop
+        // pSunset += 1 - sunsetPop
         // pSunset += sunsetPrecip/4.5
 
         console.log(`The probability of a sunset is ${pSunset/2 * 100}%`)
         
-        setWeatherData(data.locations[latitude + ", " + longitude].currentConditions, place.formatted_address)
+        setWeatherData(data.locations[latitude + ", " + longitude].values[nextSunsetHours], place.formatted_address, pSunset)
     })
 })
 
-const iconElement = document.querySelector('[data-icon]')
-const statusElement = document.querySelector('[data-status]')
 const locationElement = document.querySelector('[data-location]')
-const windElement = document.querySelector('[data-wind')
+const probElement = document.querySelector('[data-prob]')
+const cloudcoverElement = document.querySelector('[data-cloudcover]')
+const timeElement = document.querySelector('[data-datetime]')
 const temperatureElement = document.querySelector('[data-temperature]')
-const precipitationElement = document.querySelector('[data-precipitation]')
 
-function setWeatherData(data, place){
-    locationElement.textContent = place
-    
-    statusElement.textContent = data.icon.replace("-", " ").toUpperCase()
-    windElement.textContent = data.wspd + " kph"
+
+function setWeatherData(data, location, sunsetProb){
+    locationElement.textContent = location
+    probElement.textContent = `The probability of a sunset is ${(Math.round(sunsetProb*100)/100)/2 * 100}%`
+    cloudcoverElement.textContent = `${data.cloudcover}%`
+    timeElement.textContent = (new Date(data.sunset)).toLocaleTimeString()
     temperatureElement.textContent = data.temp + "℉"
-    precipitationElement.textContent = data.precip + " mm"
-    // iconElement.src = data.weather_icons[0]
 
 }

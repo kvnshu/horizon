@@ -9,33 +9,29 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbKebGf5wqvRY-GYHuX0f3QJCClC5irT8&libraries=places&callback=initMap">
 </script>
     <script defer src="script.js"></script>
-    <title>Weather App</title>
+    <title>Horizon | Sunset App</title>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="icon-container">
-                <!-- <canvas id="icon" width="100" height="100"></canvas> -->
-                <img id="icon" src="img/icon-sun.png" width="100" height="100" data-icon>
+            <div class="general-information">
+                <div class="location" data-location>Enter a Location</div>
+                <div class="prob" data-prob>To Find the Sunset Probability</div>
             </div>
         </div>
         <div class="content">
-            <div class="general-information">
-                <div class="status" data-status>Enter a Location</div>
-                <div class="location" data-location>To Find the Weather</div>
-            </div>
             <div class="details-section">
                 <div class="detail">
-                    <div class="title">Wind</div>
-                    <div class="value" data-wind>TBD</div>
+                    <div class="title">Cloud Cover</div>
+                    <div class="value" data-cloudcover>TBD</div>
                 </div>
                 <div class="detail bordered">
-                    <div class="title">Temperature</div>
-                    <div class="value" data-temperature>TBD</div>
+                    <div class="title">Sunset Time</div>
+                    <div class="value" data-datetime>TBD</div>
                 </div>
                 <div class="detail">
-                    <div class="title">Precipitation</div>
-                    <div class="value" data-precipitation>TBD</div>
+                    <div class="title">Temperature</div>
+                    <div class="value" data-temperature>TBD</div>
                 </div>
             </div>
             <div class="city-search-container">

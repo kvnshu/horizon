@@ -23,7 +23,6 @@ body {
 
 .content {
     padding: 40px;
-    margin-top: 50px;
 }
 
 .header {
@@ -31,19 +30,9 @@ body {
     height: 200px;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-}
-
-.icon-container {
-    position: relative;
-    top: 70px;
-    padding: 20px;
-    background-color: white;
-    width: 140px;
-    height: 140px;
-    border-radius: 5%;
 }
 
 .general-information {
@@ -51,23 +40,25 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 10px;
-}
-
-.status {
-    font-size: 3rem;
-    font-weight: bold;
+    color: white
 }
 
 .location {
-    font-size: 2rem;
+    font-size: 4rem;
     font-weight: normal;
-    margin-top: 10px;;
+    margin-top: 10px;
+}
+
+.prob {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .details-section {
     display: flex;
     justify-content: space-between;
-    margin-top: 40px;
 }
 
 .detail {
@@ -91,7 +82,7 @@ body {
     margin-top: 20px;
 }
 
-.detail .bordered {
+.bordered {
     border-left: 1px solid grey;
     border-right: 1px solid grey;
 }
