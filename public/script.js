@@ -5,6 +5,7 @@ searchBox.addListener('places_changed', () => {
     if (place == null) return
     const latitude = place.geometry.location.lat()
     const longitude = place.geometry.location.lng()
+    console.log(`${latitude}, ${longitude}`)
     fetch('/weather', {
         method: 'POST',
         headers: {
@@ -16,7 +17,7 @@ searchBox.addListener('places_changed', () => {
             longitude: longitude
         })
     }).then(res => res.json()).then(data => {
-        // console.log(data)
+        console.log(data)
         var todayDate = new Date()
         var todaySunsetDate = new Date(data.locations[latitude + ", " + longitude].currentConditions.sunset)
         var nextSunsetDate = todaySunsetDate
