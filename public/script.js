@@ -16,17 +16,17 @@ searchBox.addListener('places_changed', () => {
             longitude: longitude
         })
     }).then(res => res.json()).then(data => {
-        console.log(data)
+        // console.log(data)
         var todayDate = new Date()
         var todaySunsetDate = new Date(data.locations[latitude + ", " + longitude].currentConditions.sunset)
         var nextSunsetDate = todaySunsetDate
 
         // get next sunset
         if(todayDate.getTime() > todaySunsetDate.getTime()){
-            console.log(todayDate.toLocaleTimeString() + "is after " + todaySunsetDate.toLocaleTimeString())
+            // console.log(todayDate.toLocaleTimeString() + "is after " + todaySunsetDate.toLocaleTimeString())
             var nextDayHours = 24 - todayDate.getHours()
             var nextSunsetDate = new Date(data.locations[latitude + ", " + longitude].values[nextDayHours].sunset)
-            console.log(`the next sunset is tomorrow at ${nextSunsetDate.toLocaleTimeString()}`)
+            // console.log(`the next sunset is tomorrow at ${nextSunsetDate.toLocaleTimeString()}`)
         }
 
         // round off sunset time
@@ -40,16 +40,16 @@ searchBox.addListener('places_changed', () => {
 
         // get sunset measurements
         var nextSunsetHours = roundedSunsetDate.getHours() - todayDate.getHours()
-        console.log(`${nextSunsetHours} hours until sunset.`)
+        // console.log(`${nextSunsetHours} hours until sunset.`)
         // what if nextSunsetHours == 0? get currentConditions or values[0]? or are they the same?
         const sunsetHumidity = data.locations[latitude + ", " + longitude].values[nextSunsetHours].humidity / 100
         const sunsetCloudCover = data.locations[latitude + ", " + longitude].values[nextSunsetHours].cloudcover / 100
         const sunsetPop = data.locations[latitude + ", " + longitude].values[nextSunsetHours].pop / 100
         const sunsetPrecip = data.locations[latitude + ", " + longitude].values[nextSunsetHours - 1].precip / 100
 
-        console.log(sunsetHumidity)
-        console.log(sunsetCloudCover)
-        console.log(sunsetPop)
+        // console.log(sunsetHumidity)
+        // console.log(sunsetCloudCover)
+        // console.log(sunsetPop)
 
         // create model 
         var pSunset = 0;
@@ -58,7 +58,7 @@ searchBox.addListener('places_changed', () => {
         // pSunset += 1 - sunsetPop
         // pSunset += sunsetPrecip/4.5
 
-        console.log(`The probability of a sunset is ${pSunset/2 * 100}%`)
+        // console.log(`The probability of a sunset is ${pSunset/2 * 100}%`)
         
         setWeatherData(data.locations[latitude + ", " + longitude].values[nextSunsetHours], place.formatted_address, pSunset)
     })
