@@ -56,6 +56,7 @@ searchBox.addListener('places_changed', () => {
         pSunset += Math.exp(-16*((sunsetCloudCover-0.5)**2))
         // pSunset += 1 - sunsetPop
         // pSunset += sunsetPrecip/4.5
+        pSunset /= 2
         pSunset = (pSunset * 100).toFixed(2)
 
         // console.log(`The probability of a sunset is ${pSunset/2 * 100}%`)
