@@ -43,8 +43,8 @@ searchBox.addListener('places_changed', () => {
         // what if nextSunsetHours == 0? get currentConditions or values[0]? or are they the same?
         const sunsetHumidity = data.locations[latitude + ", " + longitude].values[nextSunsetHours].humidity / 100
         const sunsetCloudCover = data.locations[latitude + ", " + longitude].values[nextSunsetHours].cloudcover / 100
-        const sunsetPop = data.locations[latitude + ", " + longitude].values[nextSunsetHours].pop / 100
-        const sunsetPrecip = data.locations[latitude + ", " + longitude].values[nextSunsetHours - 1].precip / 100
+        // const sunsetPop = data.locations[latitude + ", " + longitude].values[nextSunsetHours].pop / 100
+        // const sunsetPrecip = data.locations[latitude + ", " + longitude].values[nextSunsetHours - 1].precip / 100 //nextSunsetHours - 1 might not exist
 
         // console.log(sunsetHumidity)
         // console.log(sunsetCloudCover)
