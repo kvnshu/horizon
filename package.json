@@ -1,5 +1,5 @@
 {
-  "name": "horizon",
+  "name": "weather-app",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -7,14 +7,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/K3vX21/horizon.git"
+    "url": "git+https://github.com/K3vX21/weather-app.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/K3vX21/horizon/issues"
+    "url": "https://github.com/K3vX21/weather-app/issues"
   },
-  "homepage": "https://github.com/K3vX21/horizon#readme",
+  "homepage": "https://github.com/K3vX21/weather-app#readme",
   "description": "",
   "dependencies": {
     "axios": "^0.27.2",
@@ -22,6 +22,6 @@
   },
   "devDependencies": {
     "dotenv": "^16.0.1",
-    "nodemon": "^1.19.4"
+    "nodemon": "^2.0.16"
   }
 }
