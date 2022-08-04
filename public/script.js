@@ -73,10 +73,11 @@ const timeElement = document.querySelector('[data-datetime]')
 const temperatureElement = document.querySelector('[data-temperature]')
 
 function setWeatherData(data, location, sunsetProb){
+    console.log(data)
     locationElement.textContent = location
     probElement.textContent = `Predicted sunset score: ${sunsetProb}`
     cloudcoverElement.textContent = `${data.cloudcover}%`
     let localeOptions = { month: "short", day: "numeric", hour: "numeric", minute: "numeric"}
     timeElement.textContent = (new Date(data.sunset)).toLocaleString(undefined, localeOptions)
-    temperatureElement.textContent = data.temp + "℉"
+    temperatureElement.textContent = data.temp + "°F"
 }
