@@ -1,5 +1,8 @@
+import {predictSunset} from './model.js'
+
 const searchElement = document.querySelector('[data-city-search]')
 const searchBox = new google.maps.places.SearchBox(searchElement)
+
 searchBox.addListener('places_changed', () => {
     const place = searchBox.getPlaces()[0]
     if (place == null) return
@@ -15,17 +18,14 @@ searchBox.addListener('places_changed', () => {
             latitude: latitude,
             longitude: longitude
         })
-    }).then(res => res.json()).then(data => {
+    }).then(res => res.json()).then(async data => {
+        // get next sunset
         var todayDate = new Date()
         var todaySunsetDate = new Date(data.locations[latitude + ", " + longitude].currentConditions.sunset)
         var nextSunsetDate = todaySunsetDate
-
-        // get next sunset
         if(todayDate.getTime() > todaySunsetDate.getTime()){
-            // console.log(todayDate.toLocaleTimeString() + "is after " + todaySunsetDate.toLocaleTimeString())
             var nextDayHours = 24 - todayDate.getHours()
             var nextSunsetDate = new Date(data.locations[latitude + ", " + longitude].values[nextDayHours].sunset)
-            // console.log(`the next sunset is tomorrow at ${nextSunsetDate.toLocaleTimeString()}`)
         }
 
         // round off sunset time
@@ -41,26 +41,12 @@ searchBox.addListener('places_changed', () => {
         var nextSunsetHours = roundedSunsetDate.getHours() - todayDate.getHours()
         // console.log(`${nextSunsetHours} hours until sunset.`)
         // what if nextSunsetHours == 0? get currentConditions or values[0]? or are they the same?
-        const sunsetHumidity = data.locations[latitude + ", " + longitude].values[nextSunsetHours].humidity / 100
-        const sunsetCloudCover = data.locations[latitude + ", " + longitude].values[nextSunsetHours].cloudcover / 100
-        // const sunsetPop = data.locations[latitude + ", " + longitude].values[nextSunsetHours].pop / 100
-        // const sunsetPrecip = data.locations[latitude + ", " + longitude].values[nextSunsetHours - 1].precip / 100 //nextSunsetHours - 1 might not exist
-
-        // console.log(sunsetHumidity)
-        // console.log(sunsetCloudCover)
-        // console.log(sunsetPop)
-
-        // create model 
-        var pSunset = 0;
-        pSunset += 1 - sunsetHumidity
-        pSunset += Math.exp(-16*((sunsetCloudCover-0.5)**2))
-        // pSunset += 1 - sunsetPop
-        // pSunset += sunsetPrecip/4.5
-        pSunset /= 2
-        pSunset = (pSunset * 100).toFixed(2)
-
-        // console.log(`The probability of a sunset is ${pSunset/2 * 100}%`)
+        const sunsetHumidity = data.locations[latitude + ", " + longitude].values[nextSunsetHours].humidity
+        const sunsetCloudCover = data.locations[latitude + ", " + longitude].values[nextSunsetHours].cloudcover
+        const sunsetVisibility = data.locations[latitude + ", " + longitude].values[nextSunsetHours].visibility
         
+        let pSunset = await predictSunset(sunsetHumidity, sunsetCloudCover, sunsetVisibility)
+        pSunset = Math.round(pSunset * 10) / 10 
         setWeatherData(data.locations[latitude + ", " + longitude].values[nextSunsetHours], place.formatted_address, pSunset)
     })
 })
@@ -71,12 +57,10 @@ const cloudcoverElement = document.querySelector('[data-cloudcover]')
 const timeElement = document.querySelector('[data-datetime]')
 const temperatureElement = document.querySelector('[data-temperature]')
 
-
 function setWeatherData(data, location, sunsetProb){
     locationElement.textContent = location
-    probElement.textContent = `The probability of a sunset is ${sunsetProb}%`
+    probElement.textContent = `Predicted sunset score: ${sunsetProb}`
     cloudcoverElement.textContent = `${data.cloudcover}%`
     timeElement.textContent = (new Date(data.sunset)).toLocaleTimeString()
     temperatureElement.textContent = data.temp + "℉"
-
 }
