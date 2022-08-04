@@ -19,35 +19,50 @@ searchBox.addListener('places_changed', () => {
             longitude: longitude
         })
     }).then(res => res.json()).then(async data => {
+        let locationData = data.locations[latitude + ", " + longitude]
+        
         // get next sunset
-        var todayDate = new Date()
-        var todaySunsetDate = new Date(data.locations[latitude + ", " + longitude].currentConditions.sunset)
-        var nextSunsetDate = todaySunsetDate
-        if(todayDate.getTime() > todaySunsetDate.getTime()){
-            var nextDayHours = 24 - todayDate.getHours()
-            var nextSunsetDate = new Date(data.locations[latitude + ", " + longitude].values[nextDayHours].sunset)
+        let todayDateTime = new Date()
+        let todaySunsetDateTime = new Date(locationData.currentConditions.sunset)
+        
+        let nextSunsetDateTime;
+        if(todayDateTime.getTime() < todaySunsetDateTime.getTime()){ // next sunset is today
+            nextSunsetDateTime = todaySunsetDateTime            
+        } else { // next sunset is tomorrow
+            let hoursUntilNextDay = 24 - todayDateTime.getHours()
+            nextSunsetDateTime = new Date(locationData.values[hoursUntilNextDay - 1].sunset)
         }
 
-        // round off sunset time
-        var roundedSunsetDate = nextSunsetDate
-        if(nextSunsetDate.getMinutes() < 30){
-            roundedSunsetDate.setMinutes(0, 0, 0)
+        // round sunset time for querying the nearest hourly time data
+        let nextSunsetDateTimeRounded = nextSunsetDateTime
+        if(nextSunsetDateTime.getMinutes() < 30){
+            nextSunsetDateTimeRounded.setMinutes(0, 0, 0)
         } else {
-            roundedSunsetDate.setHours(nextSunsetDate.getHours() + 1)
-            roundedSunsetDate.setMinutes(0, 0, 0)
+            nextSunsetDateTimeRounded.setHours(nextSunsetDateTime.getHours() + 1)
+            nextSunsetDateTimeRounded.setMinutes(0, 0, 0)
         }
 
-        // get sunset measurements
-        var nextSunsetHours = roundedSunsetDate.getHours() - todayDate.getHours()
-        // console.log(`${nextSunsetHours} hours until sunset.`)
-        // what if nextSunsetHours == 0? get currentConditions or values[0]? or are they the same?
-        const sunsetHumidity = data.locations[latitude + ", " + longitude].values[nextSunsetHours].humidity
-        const sunsetCloudCover = data.locations[latitude + ", " + longitude].values[nextSunsetHours].cloudcover
-        const sunsetVisibility = data.locations[latitude + ", " + longitude].values[nextSunsetHours].visibility
+        // query weather data at next sunset
+        let hoursUntilNextSunset = nextSunsetDateTimeRounded.getHours() - todayDateTime.getHours()
+        if(hoursUntilNextSunset < 0){
+            hoursUntilNextSunset += 24
+        }
+
+        // if hoursUntilNextSunset == 0, get locationData.currentConditions
+        let sunsetWeatherData;
+        if(hoursUntilNextSunset == 0){
+            sunsetWeatherData = locationData.currentConditions
+        } else{
+            sunsetWeatherData = locationData.values[hoursUntilNextSunset]
+        }
+
+        const sunsetHumidity = sunsetWeatherData.humidity
+        const sunsetCloudCover = sunsetWeatherData.cloudcover
+        const sunsetVisibility = sunsetWeatherData.visibility
         
         let pSunset = await predictSunset(sunsetHumidity, sunsetCloudCover, sunsetVisibility)
-        pSunset = Math.round(pSunset * 10) / 10 
-        setWeatherData(data.locations[latitude + ", " + longitude].values[nextSunsetHours], place.formatted_address, pSunset)
+        pSunset = Math.round(pSunset * 10) // not sure if to use 0-10, %, or 0-100 
+        setWeatherData(locationData.values[hoursUntilNextSunset], place.formatted_address, pSunset)
     })
 })
 
@@ -61,6 +76,7 @@ function setWeatherData(data, location, sunsetProb){
     locationElement.textContent = location
     probElement.textContent = `Predicted sunset score: ${sunsetProb}`
     cloudcoverElement.textContent = `${data.cloudcover}%`
-    timeElement.textContent = (new Date(data.sunset)).toLocaleTimeString()
+    let localeOptions = { month: "short", day: "numeric", hour: "numeric", minute: "numeric"}
+    timeElement.textContent = (new Date(data.sunset)).toLocaleString(undefined, localeOptions)
     temperatureElement.textContent = data.temp + "℉"
 }
