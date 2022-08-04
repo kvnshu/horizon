@@ -17,6 +17,7 @@
   "homepage": "https://github.com/K3vX21/horizon#readme",
   "description": "",
   "dependencies": {
+    "@tensorflow/tfjs": "^3.19.0",
     "axios": "^0.27.2",
     "express": "^4.18.1",
     "got": "^12.1.0",
@@ -24,6 +25,6 @@
   },
   "devDependencies": {
     "dotenv": "^16.0.1",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.19"
   }
 }
