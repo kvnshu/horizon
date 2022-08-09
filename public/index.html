@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <script type="text/javascript" defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbKebGf5wqvRY-GYHuX0f3QJCClC5irT8&libraries=places&callback=initMap">
-    </script>
+        </script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
     <script type="module" src="model.js"></script>
     <script type="module" src="script.js"></script>
     <title>Horizon | Sunset App</title>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="general-information">
-                <div class="location" data-location>Enter a Location</div>
-                <div class="prob" data-prob>To Find the Sunset Probability</div>
-            </div>
+    <div class="header">
+        <div id="title">Horizon</div>
+        <div id="subtitle">sunset prediction app</div>
+    </div>
+    <div class="search">
+        <input type="text" class="city-search" data-city-search placeholder="Type a location">
+    </div>
+    <div class="score">
+        <div id="sunset-score-title">Sunset Score:</div>
+        <div id="sunset-score">TBD</div>
+        <div class="value" id="sunset-datetime">Sunset time: TBD</div>
+    </div>
+    <div class="details">
+        <div class="detail">
+            <div id="temperature">Temperature: TBD</div>
         </div>
-        <div class="content">
-            <div class="details-section">
-                <div class="detail">
-                    <div class="title">Cloud Cover</div>
-                    <div class="value" data-cloudcover>TBD</div>
-                </div>
-                <div class="detail bordered">
-                    <div class="title">Sunset Time</div>
-                    <div class="value" data-datetime>TBD</div>
-                </div>
-                <div class="detail">
-                    <div class="title">Temperature</div>
-                    <div class="value" data-temperature>TBD</div>
-                </div>
-            </div>
-            <div class="city-search-container">
-                <input type="text" class="city-search" data-city-search placeholder="Enter Location">
-            </div>
+        <div class="detail">
+            <div id="cloudcover">Cloud Cover: TBD</div>
+        </div>
+        <div class="detail">
+            <div id="humidity">Humidity: TBD</div>
+        </div>
+        <div class="detail">
+            <div id="visibility">Visibility: TBD</div>
         </div>
     </div>
 </body>
+
 </html>
