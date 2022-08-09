@@ -66,18 +66,24 @@ searchBox.addListener('places_changed', () => {
     })
 })
 
-const locationElement = document.querySelector('[data-location]')
-const probElement = document.querySelector('[data-prob]')
-const cloudcoverElement = document.querySelector('[data-cloudcover]')
-const timeElement = document.querySelector('[data-datetime]')
-const temperatureElement = document.querySelector('[data-temperature]')
+// const locationElement = document.querySelector('[data-location]')
+const scoreElement = document.querySelector('#sunset-score')
+const dateTimeElement = document.querySelector('#sunset-datetime')
+const temperatureElement = document.querySelector('#temperature')
+const cloudcoverElement = document.querySelector('#cloudcover')
+const humidityElement = document.querySelector('#humidity')
+const visibilityElement = document.querySelector('#visibility')
 
 function setWeatherData(data, location, sunsetProb){
     console.log(data)
-    locationElement.textContent = location
-    probElement.textContent = `Predicted sunset score: ${sunsetProb}`
-    cloudcoverElement.textContent = `${data.cloudcover}%`
+    console.log(location)
+    // locationElement.textContent = location
+    scoreElement.textContent = `${sunsetProb}`
     let localeOptions = { month: "short", day: "numeric", hour: "numeric", minute: "numeric"}
-    timeElement.textContent = (new Date(data.sunset)).toLocaleString(undefined, localeOptions)
-    temperatureElement.textContent = data.temp + "°F"
+    dateTimeElement.textContent = `${(new Date(data.sunset)).toLocaleString(undefined, localeOptions)}`
+
+    temperatureElement.textContent = `Temperature: ${data.temp}°F`
+    cloudcoverElement.textContent = `Cloud Cover: ${data.cloudcover}%`
+    humidityElement.textContent = `Humidity: ${data.humidity}%`
+    visibilityElement.textContent = `Visibility: ${data.visibility}mi`
 }
