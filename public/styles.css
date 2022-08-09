@@ -5,10 +5,12 @@
 }   
 
 :root {
-    --body-bg-color:white;
-    --main-color: rgb(127, 127, 214);
+    --body-bg-color: white;
+    --primary-color: rgb(250, 136, 136);
+    --text-color: rgb(20, 41, 83);
     --section-border-radius: 25px;
     --shadow-style: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    --bg-gradient: linear-gradient(180deg, rgba(255,220,0,1) 0%, rgba(255,211,116,1) 0%, rgba(255,165,209,1) 100%);
 }
 
 body {
@@ -22,6 +24,7 @@ body {
     grid-template-rows: repeat(8, 75px);
     row-gap: 20px;
     column-gap: 20px;
+    background: var(--bg-gradient);
 }
 
 .header {
@@ -29,6 +32,7 @@ body {
     grid-column: 1 / 7;
     margin-top: 30px;
     align-self: center;
+    color: var(--text-color);
 }
 
 #title {
@@ -44,7 +48,6 @@ body {
 .search {
     grid-row: 3 / 3;
     grid-column: 3 / 10;
-    
 }
 
 input[type=text] {
@@ -76,14 +79,15 @@ input[type=text] {
 
 .score {
     border-radius: var(--section-border-radius);
-    background-color: var(--main-color);
+    background-color: var(--primary-color);
     grid-row: 4 / 9;
     grid-column: 1 / 6;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-style)
+    box-shadow: var(--shadow-style);
+    color: var(--text-color);
 }   
 
 #sunset-score-title {
@@ -107,12 +111,13 @@ input[type=text] {
     flex-direction: column;
     justify-content: space-between;
     font-size: 1em;
+    color: var(--text-color);
 }
 
 .detail {
     height: 75px;
     border-radius: 20px;
-    background-color: var(--main-color);
+    background-color: var(--primary-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -135,7 +140,7 @@ input[type=text] {
         width: 375px;
         margin: auto;
         justify-content: center;
-        row-gap: 15px;
+        row-gap: 18px;
         column-gap: 20px;
     }
     
@@ -148,8 +153,8 @@ input[type=text] {
     }
     
     #title {
-        font-size: 3em;
-        font-weight: 700;
+        font-size: 3.5em;
+        font-weight: 900;
     }
     
     #subtitle {
@@ -164,7 +169,7 @@ input[type=text] {
 
     .score {
         border-radius: var(--section-border-radius);
-        background-color: var(--main-color);
+        background-color: var(--primary-color);
         grid-row: 3 / 8;
         grid-column: 1 / 1;
         display: flex;
@@ -185,7 +190,7 @@ input[type=text] {
     .detail {
         height: 60px;
         border-radius: 20px;
-        background-color: var(--main-color);
+        background-color: var(--primary-color);
         display: flex;
         justify-content: center;
         align-items: center;
