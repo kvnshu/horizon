@@ -80,7 +80,7 @@ function setWeatherData(data, location, sunsetProb){
     // locationElement.textContent = location
     scoreElement.textContent = `${sunsetProb}`
     let localeOptions = { month: "short", day: "numeric", hour: "numeric", minute: "numeric"}
-    dateTimeElement.textContent = `${(new Date(data.sunset)).toLocaleString(undefined, localeOptions)}`
+    dateTimeElement.textContent = `Sunset time: ${(new Date(data.sunset)).toLocaleString(undefined, localeOptions)}`
 
     temperatureElement.textContent = `Temperature: ${data.temp}°F`
     cloudcoverElement.textContent = `Cloud Cover: ${data.cloudcover}%`
