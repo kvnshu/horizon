@@ -50,6 +50,7 @@ input[type=text] {
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 40px;
+    font-size: 1em;
 }
 
 
@@ -58,12 +59,13 @@ input[type=text] {
 }
 
 .pac-item {
-    font-size: 2rem;
-    padding: 10px 10px;
+    font-size: 1rem;
+    padding: 5px 5px;
 }
 
 .pac-item-query {
-    font-size: 2rem;
+    font-size: 1rem;
+    padding-left: 15px;
     padding-right: 14px;
 }
 
@@ -78,21 +80,95 @@ input[type=text] {
     justify-content: center;
 }   
 
+#sunset-score-title {
+    font-size: 2em;
+}
+
+#sunset-score {
+    font-size: 6em;
+}
+
+#sunset-datetime {
+    font-size: 1.5em;
+}
+
 .details {
     grid-row: 4 / 9;
     grid-column: 7 / 13;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    font-size: 1em;
 }
 
 .detail {
-    height: 6em;
+    height: 75px;
     border-radius: 20px;
     background-color: var(--main-color);
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.5em;
 }
 
 /* Mobile */
+
+/* Portrait for iPhone X*/
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 896px)
+  and (orientation: portrait) { 
+    body {
+        display: grid;
+        grid-template-columns: repeat(1, 348px);
+        grid-template-rows: repeat(12, 60px);
+        min-height: 100vh;
+        width: 375px;
+        margin: auto;
+        justify-content: center;
+        row-gap: 12px;
+        column-gap: 20px;
+    }
+    
+    .header {
+        grid-column: 1;
+        grid-row: 1 ;
+        margin-top: 10px;
+        align-self: start;
+    }
+    
+    .search {
+        grid-row-start: 2;
+        grid-column: 1 / 1;
+    }
+
+    .score {
+        border-radius: var(--section-border-radius);
+        background-color: var(--main-color);
+        grid-row: 3 / 8;
+        grid-column: 1 / 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .details {
+        grid-row: 8 / 12;
+        grid-column: 1 / 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size: 1em;
+    }
+
+    .detail {
+        height: 60px;
+        border-radius: 20px;
+        background-color: var(--main-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5em;
+    }
+}
