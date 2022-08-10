@@ -1,6 +1,6 @@
 *,  *::before, *::after {
     box-sizing: border-box;
-    font-family: Lato, sans-serif;
+    font-family: 'Lato', serif;
     /* border-style: dotted; */
 }   
 
@@ -43,6 +43,7 @@ body {
 #subtitle {
     margin-top: -10px;
     font-size: 2em;
+    font-weight: 400;
 }
 
 .search {
