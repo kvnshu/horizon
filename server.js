@@ -12,12 +12,13 @@ app.use(express.json())
 app.use(express.static('public'))
 
 app.post('/weather', (req, res) => {
-    const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/`
-              + `${req.body.latitude}%2C%20${req.body.longitude}?unitGroup=us`
-              + `&include=hours%2Cdays`
-              + `&key=${VISUALCROSSING_API_KEY}`
-              + `&contentType=json`
+    // const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/`
+    //           + `${req.body.latitude}%2C%20${req.body.longitude}?unitGroup=us`
+    //           + `&include=hours%2Cdays`
+    //           + `&key=${VISUALCROSSING_API_KEY}`
+    //           + `&contentType=json`;
 
+    console.log("Request received by server: " , req.body);
     
     const url2 = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=`
                + `${req.body.latitude}%2C%20${req.body.longitude}`
@@ -41,3 +42,5 @@ app.post('/weather', (req, res) => {
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 })
+
+module.exports = app;
