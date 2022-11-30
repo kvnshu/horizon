@@ -11,6 +11,12 @@ const port = process.env.PORT || 8080
 app.use(express.json())
 app.use(express.static('public'))
 
+app.set('view engine', 'html');
+
+app.get("/", (req, res) => {
+    res.render('index');
+})
+
 app.post('/weather', (req, res) => {
     // const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/`
     //           + `${req.body.latitude}%2C%20${req.body.longitude}?unitGroup=us`
