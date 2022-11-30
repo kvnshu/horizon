@@ -11,9 +11,9 @@ const port = process.env.PORT || 8080
 app.use(express.json())
 app.use(express.static('public'))
 
-app.get("/", (req, res) => {
-    res.render('index');
-})
+// app.get("/", (req, res) => {
+//     res.render('index.html');
+// })
 
 app.post('/weather', (req, res) => {
     const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/`
