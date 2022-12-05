@@ -19,12 +19,13 @@
   "dependencies": {
     "@tensorflow/tfjs": "^3.19.0",
     "axios": "^0.27.2",
+    "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "got": "^12.1.0",
     "update-notifier": "^6.0.2"
   },
   "devDependencies": {
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.3",
     "nodemon": "^2.0.19"
   }
 }
