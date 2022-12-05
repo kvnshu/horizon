@@ -1,7 +1,8 @@
-console.log("NODE ENV: ", process.env.NODE_ENV)
-
-if(process.env.NODE_ENV !== 'production'){
+if(!process.env.PRODUCTION){
     require('dotenv').config()
+    console.log("App is NOT running in \"production\".")
+} else {
+    console.log("App is running in \"production\".")
 }
 
 const VISUALCROSSING_API_KEY = process.env.VISUALCROSSING_API_KEY
