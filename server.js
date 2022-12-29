@@ -1,4 +1,5 @@
-if(!process.env.PRODUCTION){
+console.log("IS_PRODUCTION: ", process.env.IS_PRODUCTION)
+if(!process.env.IS_PRODUCTION){
     require('dotenv').config()
     console.log("App is NOT running in \"production\".")
 } else {
