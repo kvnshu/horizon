@@ -60,9 +60,10 @@ searchBox.addListener('places_changed', () => {
         const sunsetCloudCover = sunsetWeatherData.cloudcover
         const sunsetVisibility = sunsetWeatherData.visibility
         
-        let pSunset = await predictSunset(sunsetHumidity, sunsetCloudCover, sunsetVisibility)
-        pSunset = Math.round(pSunset * 10) // not sure if to use 0-10, %, or 0-100 
-        setWeatherData(locationData.values[hoursUntilNextSunset], place.formatted_address, pSunset)
+        let score = await predictSunset(sunsetHumidity, sunsetCloudCover, sunsetVisibility)
+        score = Math.round((score + 7) * 10/7 * 100, 0)
+        score = 
+        setWeatherData(locationData.values[hoursUntilNextSunset], place.formatted_address, score)
     })
 })
 
@@ -75,8 +76,8 @@ const humidityElement = document.querySelector('#humidity')
 const visibilityElement = document.querySelector('#visibility')
 
 function setWeatherData(data, location, sunsetProb){
-    console.log(data)
-    console.log(location)
+    // console.log(data)
+    // console.log(location)
     // locationElement.textContent = location
     scoreElement.textContent = `${sunsetProb}`
     let localeOptions = { month: "short", day: "numeric", hour: "numeric", minute: "numeric"}
