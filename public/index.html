@@ -1,68 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0BWC94QGS9"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-0BWC94QGS9"
+    ></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-        gtag('config', 'G-0BWC94QGS9');
+      gtag("config", "G-0BWC94QGS9");
     </script>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-        rel="stylesheet">
-    <script type="text/javascript" defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbKebGf5wqvRY-GYHuX0f3QJCClC5irT8&libraries=places&callback=initMap">
-        </script>
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbKebGf5wqvRY-GYHuX0f3QJCClC5irT8&libraries=places&callback=initMap"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
     <script type="module" src="model.js"></script>
     <script type="module" src="script.js"></script>
     <title>Horizon | Sunset App</title>
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://horizon-web.vercel.com/">
-    <meta property="og:title" content="Horizon | Sunset prediction app">
-    <meta property="og:description"
-        content="Horizon predicts the quality of the next sunset at a given location leveraging machine learning technology.">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://horizon-web.vercel.com/" />
+    <meta property="og:title" content="Horizon | Sunset prediction app" />
+    <meta
+      property="og:description"
+      content="Horizon predicts the quality of the next sunset at a given location leveraging machine learning technology."
+    />
     <!-- <meta property="og:image" content="/images/logo.png"> -->
     <!-- <link rel="icon" type="image/x-icon" href="/images/favicon.png"> -->
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="header">
+      <div>
         <div id="title">Horizon</div>
         <div id="subtitle">sunset prediction app</div>
+      </div>
+      <div id="about">
+        <a
+          href="https://medium.com/shiftcreatorspace/predicting-sunsets-with-the-weather-9612481a9d77"
+
+        >
+          About
+        </a>
+      </div>
     </div>
     <div class="search">
-        <input type="text" class="city-search" data-city-search placeholder="Type a location">
+      <input
+        type="text"
+        class="city-search"
+        data-city-search
+        placeholder="Type a location"
+      />
     </div>
     <div class="score">
-        <div id="sunset-score-title">Sunset Score:</div>
-        <div id="sunset-score">TBD</div>
-        <div class="value" id="sunset-datetime">Sunset time: TBD</div>
+      <div id="sunset-score-title">Sunset Score:</div>
+      <div id="sunset-score">TBD</div>
+      <div class="value" id="sunset-datetime">Sunset time: TBD</div>
     </div>
     <div class="details">
-        <div class="detail">
-            <div id="temperature">Temperature: TBD</div>
-        </div>
-        <div class="detail">
-            <div id="cloudcover">Cloud Cover: TBD</div>
-        </div>
-        <div class="detail">
-            <div id="humidity">Humidity: TBD</div>
-        </div>
-        <div class="detail">
-            <div id="visibility">Visibility: TBD</div>
-        </div>
+      <div class="detail">
+        <div id="temperature">Temperature: TBD</div>
+      </div>
+      <div class="detail">
+        <div id="cloudcover">Cloud Cover: TBD</div>
+      </div>
+      <div class="detail">
+        <div id="humidity">Humidity: TBD</div>
+      </div>
+      <div class="detail">
+        <div id="visibility">Visibility: TBD</div>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
