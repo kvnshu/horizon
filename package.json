@@ -27,7 +27,6 @@
     "update-notifier": "^6.0.2"
   },
   "devDependencies": {
-    "dotenv": "^16.0.3",
-    "nodemon": "^2.0.22"
+    "dotenv": "^16.0.3"
   }
 }
