@@ -76,8 +76,8 @@ const humidityElement = document.querySelector('#humidity')
 const visibilityElement = document.querySelector('#visibility')
 
 function setWeatherData(data, location, sunsetProb){
-    console.log(data)
-    console.log(location)
+    // console.log(data)
+    // console.log(location)
     // locationElement.textContent = location
     scoreElement.textContent = `${sunsetProb}`
     let localeOptions = { month: "short", day: "numeric", hour: "numeric", minute: "numeric"}
