@@ -1,9 +1,10 @@
 {
   "name": "horizon",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
